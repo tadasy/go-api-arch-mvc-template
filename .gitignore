@@ -1,0 +1,61 @@
+# バイナリファイル
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# 実行可能なバイナリ（プロジェクト名と同じ名前のファイル）
+/go-api-arch-mvc-template
+/main
+
+# ベンダリングされた依存関係
+/vendor/
+
+# Go特有のファイル
+*.o
+*.a
+*.log
+
+# テストバイナリ、ビルドファイル
+_testmain.go
+
+# カバレッジファイル
+*.coverprofile
+coverage.txt
+
+# 環境設定ファイル
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDEの設定ファイル
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sublime-workspace
+.DS_Store
+
+# デバッグファイル
+debug
+
+# ログファイル
+*.log
+
+# テンポラリディレクトリ
+/tmp/
+/temp/
+
+# OS固有ファイル
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
