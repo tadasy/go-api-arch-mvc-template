@@ -1,0 +1,20 @@
+CREATE DATABASE IF NOT EXISTS `api_database` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+USE `api_database`;
+
+-- albums
+CREATE TABLE IF NOT EXISTS `albums` (
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
+  `release_date` DATE,
+  `category_id` INT,
+  `title` VARCHAR(255),
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- categories
+CREATE TABLE IF NOT EXISTS `categories` (
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
+  `name` VARCHAR(255),
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

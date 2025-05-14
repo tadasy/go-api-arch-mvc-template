@@ -1,0 +1,190 @@
+openapi: 3.0.3
+info:
+  title: Go API Template
+  version: 1.0.0
+servers:
+  - url: http://0.0.0.0:8080/api/v1
+  - url: http://localhost:8080/api/v1
+  - url: http://127.0.0.1:8080/api/v1
+paths:
+  /album:
+    post:
+      summary: Create a new album
+      operationId: createAlbum
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              ref: '#/components/schemas/AlbumCreateRequest'
+      responses:
+        '201':
+          description: Album created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlbumResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /album/{id}:
+    get:
+      summary: Get an album by ID
+      operationId: getAlbumById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the album to retrieve
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Album retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlbumResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Album not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    patch:
+      summary: Update an album by ID
+      operationId: updateAlbumById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the album to update
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AlbumUpdateRequest'
+      responses:
+        '200':
+          description: Album updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlbumResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Album not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      summary: Delete an album by ID
+      operationId: deleteAlbumById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the album to delete
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Album deleted successfully
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Album not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    Catebory:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          enum:
+            - food
+            - music
+            - sports
+      required:
+        - name
+    ReleaseDate:
+      type: string
+      format: date
+    Anniversary:
+      type: integer
+    AlbumResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        category:
+          $ref: '#/components/schemas/Catebory'
+        releaseDate:
+          $ref: '#/components/schemas/ReleaseDate'
+        anniversary:
+          $ref: '#/components/schemas/Anniversary'
+      required:
+        - id
+        - title
+        - category
+        - anniversary
+        - releaseDate
+    AlbumUpdateRequest:
+      type: object
+      properties:
+        title:
+          type: string
+        category:
+          $ref: '#/components/schemas/Catebory'
+        releaseDate:
+          $ref: '#/components/schemas/ReleaseDate'
+    AlbumCreateRequest:
+      type: object
+      properties:
+        title:
+          type: string
+        category:
+          $ref: '#/components/schemas/Catebory'
+        releaseDate:
+          $ref: '#/components/schemas/ReleaseDate'
+      required:
+        - title
+        - category
+        - releaseDate
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
