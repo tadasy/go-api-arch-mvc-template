@@ -10,6 +10,7 @@ import (
 
 type CategoryTestSuite struct {
 	tester.DBSQLiteSuite
+	// tester.DBMySQLSuite
 }
 
 func TestCategoryTestSuite(t *testing.T) {
