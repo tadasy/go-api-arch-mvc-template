@@ -22,17 +22,24 @@ import (
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
-// Defines values for CateboryName.
+// Defines values for CategoryName.
 const (
-	Food   CateboryName = "food"
-	Music  CateboryName = "music"
-	Sports CateboryName = "sports"
+	Food   CategoryName = "food"
+	Music  CategoryName = "music"
+	Sports CategoryName = "sports"
 )
+
+// AlbumCreateRequest defines model for AlbumCreateRequest.
+type AlbumCreateRequest struct {
+	Category    Category    `json:"category"`
+	ReleaseDate ReleaseDate `json:"releaseDate"`
+	Title       string      `json:"title"`
+}
 
 // AlbumResponse defines model for AlbumResponse.
 type AlbumResponse struct {
 	Anniversary Anniversary `json:"anniversary"`
-	Category    Catebory    `json:"category"`
+	Category    Category    `json:"category"`
 	Id          int         `json:"id"`
 	ReleaseDate ReleaseDate `json:"releaseDate"`
 	Title       string      `json:"title"`
@@ -40,7 +47,7 @@ type AlbumResponse struct {
 
 // AlbumUpdateRequest defines model for AlbumUpdateRequest.
 type AlbumUpdateRequest struct {
-	Category    *Catebory    `json:"category,omitempty"`
+	Category    *Category    `json:"category,omitempty"`
 	ReleaseDate *ReleaseDate `json:"releaseDate,omitempty"`
 	Title       *string      `json:"title,omitempty"`
 }
@@ -48,14 +55,14 @@ type AlbumUpdateRequest struct {
 // Anniversary defines model for Anniversary.
 type Anniversary = int
 
-// Catebory defines model for Catebory.
-type Catebory struct {
+// Category defines model for Category.
+type Category struct {
 	Id   *int         `json:"id,omitempty"`
-	Name CateboryName `json:"name"`
+	Name CategoryName `json:"name"`
 }
 
-// CateboryName defines model for Catebory.Name.
-type CateboryName string
+// CategoryName defines model for Category.Name.
+type CategoryName string
 
 // ErrorResponse defines model for ErrorResponse.
 type ErrorResponse struct {
@@ -65,11 +72,8 @@ type ErrorResponse struct {
 // ReleaseDate defines model for ReleaseDate.
 type ReleaseDate = openapi_types.Date
 
-// CreateAlbumJSONBody defines parameters for CreateAlbum.
-type CreateAlbumJSONBody = interface{}
-
 // CreateAlbumJSONRequestBody defines body for CreateAlbum for application/json ContentType.
-type CreateAlbumJSONRequestBody = CreateAlbumJSONBody
+type CreateAlbumJSONRequestBody = AlbumCreateRequest
 
 // UpdateAlbumByIdJSONRequestBody defines body for UpdateAlbumById for application/json ContentType.
 type UpdateAlbumByIdJSONRequestBody = AlbumUpdateRequest
@@ -889,19 +893,19 @@ func RegisterHandlersWithOptions(router gin.IRouter, si ServerInterface, options
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"H4sIAAAAAAAC/+xWTU/jMBD9K9Ysx6hJAWlRbkBXqLdVxZ4QBzeZNEaJbexJV1WV/76y3bBN01KWL+0B",
-	"cSnueN6b9940WUOmaq0kSrKQrsFmJdbcf7ys5k09Q6uVtOgOtFEaDQn0X3MpxRKN5Wbl/j0xWEAK3+K/",
-	"/eJNs/hyq7SNIOOEC3X82jUnnKtwR+SumlYaIQUhCRdo3LnBCrnFCSc81m62VdpGQIIq3GpqyQi5gNY3",
-	"fWyEwRzSOwfc1W4xj3rj92ncR11LNX/AjByY1/KXzjnhDB8btDQU9DWyfMj4Q/Z9q4cuPFEaDHXIN8lr",
-	"j46yqZ3MhVJO6LqxIoMIrFaG7JaUB9zxbfYJ/sMYZQ6Ht0Zr+eIF9neF+zBmffELZWpOkIJzGYbMXYpl",
-	"oTxmEB9uFLv8OWW3WOsqXHIyCyUhhfEoGSUORmmUXAtI4WyUjM4gAs2p9GPE3OXKj6dCpNyQnISS0xxS",
-	"uDbICX34IMyFlq5U7o3KlCSU/hbXuhKZvxc/WAff/RK4T89ttmsdULpct30JyTToD4IVnvZpMv4nAifH",
-	"GDwZ7cFztJkRmoKOvoBlnmPObJNlaG3RVJVfoPMkeTcq/cztoXLFc2aeZIrANnXtd2pjFONM4m8WTHUF",
-	"wd94LfLWgedYYcha3+aJP/eDXq2muU+I4TUSGgvp3XqHxm2JbDphqmBUYkBjpNimu0sppD5j0O1p+BXs",
-	"mxptqbK73+39wPHzMMDQmQD7PznjsM8/DzvIIBWxQjUy30lG8JZxuTFqvmLTieO4wD0Lf4P01hgYJCNw",
-	"+WFBSD579buBviJ2IGI3SHvypTll5TBh4SXmrSFr9OYh+V4Re92T7Wi6+q9sL3q0fXq+g5Zf6T6Q7mDh",
-	"IOC+CM2yi21jKkihJNJpHCcj/5deJBdJzLWIl2Noo52iSmW8KpWl58vGp999t3G/7L79EwAA//+HC1CA",
-	"ew0AAA==",
+	"H4sIAAAAAAAC/+yW30/bMBDH/xXrtseoSQFpKG9AJ9S3qWJPiAeTXFujxDb2pVNV5X+ffG6hadqBBlSb",
+	"hPpSRef78f1+zskKClNbo1GTh3wFvphjLfnvRXXf1FcOJeEEHxv0FJ5aZyw6UsgxhSScGbcM/786nEIO",
+	"X9LnjOk6XXq1iWsTcFih9DiShC8dm2yFtgmQoorP0NIi5ODJKT2DlpM+NsphCfntOix5bq5b8y7ZnDf3",
+	"D1hQyMyzTtBboz32x5RaqwU6L1+e9GIrtE3+SiBVbs2oNOEM3VGEUyUk+9TbHv+VWv605X/BTb/7rtV9",
+	"F662Wu8Odcg3LWuujrqpg8xTY4LQdeNVAQl4axz5LSkPuMNp9gn+3TnjDsNbo/dy9gr7N4H7aky64k+N",
+	"qyVBDsFl6HceKNZTwzWj+HBtxMWPsbjB2lbxUJBZGQ05DAfZIAtljEUtrYIcTgfZ4BQSsJLmPEYqA1c8",
+	"nolIhSElKaPHJeQQbyqGD+Jc6OnSlGxUYTSh5lPS2koVfC598KH85tZ7cbX7F2Lb1ZBcg/wgesF9n2TD",
+	"9+3gyWkuXqIvnLIUheQAUXCPpfBNUaD306aqeIPOsuzdWulCt6eVS1kK9yRTAr6pa16qtVNCCo2/RHQ1",
+	"BESD05Uq21C8xAojbF2fR/ycB71cjktGxMkaCZ2H/Ha108bNHMV4JMxU0BxjNUFGrLMHTCFnyGCzqPEa",
+	"7JqabKmyu+DtXc/xszhA35lY9l9yJtQ+O17tKIM2JKam0eUOGdFbIfXaqPulGI9CjzPcs/HXSG/FwCE5",
+	"hYsPAyE79upvBvpE7ABi10h7+LKSinmfsPgV81bIGrt+S74XYh/0aut+s73q1XZ0vqOWn3QfoDta2AOc",
+	"g9AtNtg2roIc5kQ2T9NswL/8PDvPUmlVuhhCm+wEVaaQ1dx4+nPY8OQbZxt2w+7a3wEAAP//d3zya2gO",
+	"AAA=",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file

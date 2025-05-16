@@ -16,7 +16,7 @@ paths:
         content:
           application/json:
             schema:
-              ref: '#/components/schemas/AlbumCreateRequest'
+              $ref: '#/components/schemas/AlbumCreateRequest'
       responses:
         '201':
           description: Album created successfully
@@ -122,7 +122,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    Catebory:
+    Category:
       type: object
       properties:
         id:
@@ -148,7 +148,7 @@ components:
         title:
           type: string
         category:
-          $ref: '#/components/schemas/Catebory'
+          $ref: '#/components/schemas/Category'
         releaseDate:
           $ref: '#/components/schemas/ReleaseDate'
         anniversary:
@@ -165,7 +165,7 @@ components:
         title:
           type: string
         category:
-          $ref: '#/components/schemas/Catebory'
+          $ref: '#/components/schemas/Category'
         releaseDate:
           $ref: '#/components/schemas/ReleaseDate'
     AlbumCreateRequest:
@@ -174,7 +174,7 @@ components:
         title:
           type: string
         category:
-          $ref: '#/components/schemas/Catebory'
+          $ref: '#/components/schemas/Category'
         releaseDate:
           $ref: '#/components/schemas/ReleaseDate'
       required:
